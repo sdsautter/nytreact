@@ -2,7 +2,7 @@
 var React = require("react");
 
 // Here we include all of the sub-components
-var Saved = require("./children/Saved.js");
+var Saved = require("./children/Saved");
 var Search = require("./children/Search");
 
 // Helper for making AJAX requests to our API
@@ -33,17 +33,17 @@ var Main = React.createClass({
   componentDidUpdate: function() {
 
     // Run the query for the address
-    helpers.runQuery(this.state.searchTerm).then(function(data) {
+    helpers.runQuery(this.state.searchTerm, this.state.beginDate, this.state.endDate).then(function(data) {
       if (data !== this.state.results) {
         console.log("Address", data);
         this.setState({ results: data });
 
         // After we've received the result... then post the search term to our history.
-        helpers.postHistory(this.state.searchTerm).then(function() {
+        helpers.postArticle(this.state.searchTerm).then(function() {
           console.log("Updated!");
 
-          // After we've done the post... then get the updated history
-          helpers.getHistory().then(function(response) {
+          // After we've done the post... then get the updated Article
+          helpers.getArticle().then(function(response) {
             console.log("Current History", response.data);
 
             console.log("History", response.data);
@@ -59,7 +59,7 @@ var Main = React.createClass({
   setTerm: function(term) {
     this.setState({ searchTerm: term });
   },
-  setBeginDate: function(beingDate) {
+  setBeginDate: function(beginDate) {
     this.setState({ beginDate: beginDate });
   },
   setEndDate: function(endDate) {
@@ -91,11 +91,9 @@ var Main = React.createClass({
             </p>
           </div> */}
 
-          <div className="col-md-6">
+          <div className="col-md-12">
 
-            <Search setTerm={this.setTerm} />
-            <Search beginDate={this.setBeginDate} />
-            <Search endDate={this.setsetEndDate} />
+            <Search setTerm={this.setTerm} beginDate={this.setBeginDate} endDate={this.setsetEndDate}/>
             
 
           </div>
@@ -110,7 +108,7 @@ var Main = React.createClass({
 
         <div className="row">
 
-          <Saved article={this.state.article} />
+          {/*<Saved article={this.state.article} />*/}
 
         </div>
 

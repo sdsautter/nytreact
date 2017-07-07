@@ -3,11 +3,8 @@ var axios = require("axios");
 
 var Config = require("../../../config.js")
 
-var apiKey = Config.NYT.apiKey;
+var apiKey = process.env.apiKey || Config.NYT.apiKey;
 
-
-// Geocoder API
-var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
 
 // Helper functions for making API Calls
 var helper = {
@@ -18,10 +15,10 @@ var helper = {
     console.log(location);
 
     // Figure out the geolocation
-    var queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${apiKey}&q=${search}&begin_date=${beginDate}&end_date=${endDate}`;
+    var queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${apiKey}&q=${search}&begin_date=${beginDate}`;
     return axios.get(queryURL).then(function(response) {
       // If get get a result, return that result's formatted address property
-      if (response.docs[0]) {
+      if (response.docs) {
           console.log(data.docs);
         return response.data.docs;
       }
@@ -31,12 +28,12 @@ var helper = {
   },
 
   // This function hits our own server to retrieve the record of query results
-  getHistory: function() {
+  getArticle: function() {
     return axios.get("/api/saved");
   },
 
   // This function posts new searches to our database.
-  postHistory: function(title, date, url) {
+  postArticle: function(title, date, url) {
     return axios.post("/api/saved", { 
         title: title,
         date: date,

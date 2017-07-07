@@ -2,12 +2,12 @@
 var React = require("react");
 
 // Creating the Form component
-var Form = React.createClass({
+var Search = React.createClass({
 
   // Here we set a generic state associated with the text being searched for
   getInitialState: function() {
     return ( { 
-        term: "", 
+        searchTerm: "", 
         beginDate: "", 
         endDate: "" 
     }) ;
@@ -63,9 +63,7 @@ var Form = React.createClass({
     this.props.beginDate(this.state.beginDate);
     this.props.endDate(this.state.endDate);
     
-    this.setState({ term: "" });
-    this.beginDate({ beginDate: "" });
-    this.endDate({ endDate: "" });
+    this.setState({ term: "", beginDate: "", endDate: "" });
     
   },
   // Here we describe this component's render method
@@ -166,4 +164,4 @@ var Form = React.createClass({
 });
 
 // Export the component back for use in other files
-module.exports = Form;
+module.exports = Search;
