@@ -1,0 +1,25 @@
+.col-xs-10, .col-xs-3, .col-xs-9 {
+	/*border: 1px solid black;*/
+	margin: 1% 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+#searchTerms, #numRecords, #startYear, #endYear {
+	width: 80%;
+}
+
+.panel-body {
+	max-width: 85%;
+	margin: 0 auto;
+}
+
+#NYT {
+	padding-top: 3%;
+}
+
+#headerRow {
+	background-color: #D9EDF7;
+}
